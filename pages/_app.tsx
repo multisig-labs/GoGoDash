@@ -1,32 +1,48 @@
-import '../styles/globals.css';
-import '@rainbow-me/rainbowkit/styles.css';
-import type { AppProps } from 'next/app';
-import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
-import { configureChains, createClient, WagmiConfig } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum, goerli } from 'wagmi/chains';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
+import "../styles/globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
+import "@tremor/react/dist/esm/tremor.css";
+import type { AppProps } from "next/app";
+import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { Chain } from "wagmi/chains";
+import { publicProvider } from "wagmi/providers/public";
+import { GoGoProvider } from "../components/gogoProvider";
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
+
+const avalancheChain: Chain = {
+  id: 43_114,
+  name: "Avalanche",
+  network: "avalanche",
+  // iconUrl: "https://example.com/icon.svg",
+  // iconBackground: "#fff",
+  nativeCurrency: {
+    decimals: 18,
+    name: "Avalanche",
+    symbol: "AVAX",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://api.avax.network/ext/bc/C/rpc"],
+    },
+  },
+  blockExplorers: {
+    default: { name: "SnowTrace", url: "https://snowtrace.io" },
+    etherscan: { name: "SnowTrace", url: "https://snowtrace.io" },
+  },
+  testnet: false,
+};
 
 const { chains, provider, webSocketProvider } = configureChains(
+  [avalancheChain],
   [
-    mainnet,
-    polygon,
-    optimism,
-    arbitrum,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [goerli] : []),
-  ],
-  [
-    alchemyProvider({
-      // This is Alchemy's default API key.
-      // You can get your own at https://dashboard.alchemyapi.io
-      apiKey: '_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC',
+    jsonRpcProvider({
+      rpc: (chain) => ({ http: chain.rpcUrls.default.http[0] }),
     }),
-    publicProvider(),
   ]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'RainbowKit App',
+  appName: "GoGoTools",
   chains,
 });
 
@@ -41,7 +57,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />
+        <GoGoProvider>
+          <Component {...pageProps} />
+        </GoGoProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );

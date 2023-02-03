@@ -1,29 +1,39 @@
-This is a [RainbowKit](https://rainbowkit.com) + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org/) project bootstrapped with [`create-rainbowkit`](https://github.com/rainbow-me/rainbowkit/tree/main/packages/create-rainbowkit).
+<h1 align="center">GoGoDash 🎈</h1>
+<p align="center">A (growing) collection of useful UIs and Dashboards for Avalanche subnet developers.</p>
+
+## Tech Stack
+
+GoGoDash is built on the shoulders of these giants:
+
+- ReactJS
+- [NextJS](https://nextjs.org/)
+- [Wagmi](https://wagmi.sh/)
+- [RainbowKit](https://www.rainbowkit.com)
+- [TailwindCSS](https://tailwindcss.com/docs)
+- [Tremor](https://www.tremor.so)
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Avalanche Data
 
-## Learn More
+The `gogodash.js` is a depencency-free, pure Javascript class that will `fetch` from your Avalanche node running on localhost, and provide a single JSON blob with the data about the node and your custom Subnets, nicely formatted for use by a front end dashboard.
 
-To learn more about this stack, take a look at the following resources:
+## Wallet
 
-- [RainbowKit Documentation](https://rainbowkit.com) - Learn how to customize your wallet connection flow.
-- [wagmi Documentation](https://wagmi.sh) - Learn how to interact with Ethereum.
-- [Next.js Documentation](https://nextjs.org/docs) - Learn how to build a Next.js application.
+RainbowKit is configured to access both the C-Chain and your custom Subnet-EVM on your local Avalanche Node.
 
-You can check out [the RainbowKit GitHub repository](https://github.com/rainbow-me/rainbowkit) - your feedback and contributions are welcome!
+## Precompiles
 
-## Deploy on Vercel
+Interact with all the standard precompiles in Subnet-EVM directly in the browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## GoGoPool
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Brought to you by [GoGoPool](https://www.gogopool.com), let a thousand Subnet's bloom!
